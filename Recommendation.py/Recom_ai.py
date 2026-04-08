@@ -1,7 +1,7 @@
-# 📚 Book Recommendation System (50 Books)
+#  Book Recommendation System (50 Books)
 
 books = {
-    # Fantasy (10)
+    # Fantasy 
     "harry potter": {"genre": ["fantasy"], "author": "jk rowling"},
     "lord of the rings": {"genre": ["fantasy"], "author": "jrr tolkien"},
     "the hobbit": {"genre": ["fantasy"], "author": "jrr tolkien"},
@@ -13,7 +13,7 @@ books = {
     "eragon": {"genre": ["fantasy"], "author": "christopher paolini"},
     "the witcher": {"genre": ["fantasy"], "author": "andrzej sapkowski"},
 
-    # Romance (10)
+    # Romance 
     "pride and prejudice": {"genre": ["romance"], "author": "jane austen"},
     "the notebook": {"genre": ["romance"], "author": "nicholas sparks"},
     "fault in our stars": {"genre": ["romance"], "author": "john green"},
@@ -25,7 +25,7 @@ books = {
     "verity": {"genre": ["romance", "thriller"], "author": "colleen hoover"},
     "twilight": {"genre": ["romance", "fantasy"], "author": "stephenie meyer"},
 
-    # Thriller (10)
+    # Thriller 
     "gone girl": {"genre": ["thriller"], "author": "gillian flynn"},
     "girl with dragon tattoo": {"genre": ["thriller"], "author": "stieg larsson"},
     "da vinci code": {"genre": ["thriller"], "author": "dan brown"},
@@ -37,7 +37,7 @@ books = {
     "sharp objects": {"genre": ["thriller"], "author": "gillian flynn"},
     "dark places": {"genre": ["thriller"], "author": "gillian flynn"},
 
-    # Self-help / Finance (10)
+    # Self-help 
     "atomic habits": {"genre": ["self-help"], "author": "james clear"},
     "rich dad poor dad": {"genre": ["finance"], "author": "robert kiyosaki"},
     "think and grow rich": {"genre": ["finance"], "author": "napoleon hill"},
@@ -49,7 +49,7 @@ books = {
     "psychology of money": {"genre": ["finance"], "author": "morgan housel"},
     "richest man in babylon": {"genre": ["finance"], "author": "george clason"},
 
-    # Sci-fi (10)
+    # Sci-fi 
     "dune": {"genre": ["sci-fi"], "author": "frank herbert"},
     "foundation": {"genre": ["sci-fi"], "author": "isaac asimov"},
     "neuromancer": {"genre": ["sci-fi"], "author": "william gibson"},
@@ -62,18 +62,18 @@ books = {
     "recursion": {"genre": ["sci-fi"], "author": "blake crouch"}
 }
 
-# 🔍 Book-based recommendation
+# Book recommendation
 def recommend_by_book(book):
     book = book.lower()
     if book not in books:
-        return ["❌ Book not found"]
+        return [" Book not found"]
 
     target = books[book]["genre"]
     return [b for b, data in books.items()
             if b != book and any(g in data["genre"] for g in target)]
 
 
-# 🎯 Genre-based recommendation
+# Genre recommendation
 def clean_text(text):
     return text.lower().replace("-", " ").strip()
 
@@ -88,20 +88,20 @@ def recommend_by_genre(genre):
             if genre == clean_text(g):
                 results.append(book)
 
-    return results if results else ["❌ No books found"]
+    return results if results else [" No books found"]
 
-# ✍️ Author-based recommendation
+#  Author recommendation
 def recommend_by_author(author):
     author = author.lower()
 
     # Step 1: Find books by author
     author_books = [b for b, data in books.items() if author in data["author"]]
 
-    # Step 2: If more than 1 → return directly
+    
     if len(author_books) > 1:
         return author_books
 
-    # Step 3: If only 1 → recommend similar genre
+    
     elif len(author_books) == 1:
         book = author_books[0]
         genre = books[book]["genre"]
@@ -111,11 +111,13 @@ def recommend_by_author(author):
 
         return author_books + recommendations[:5]
 
-    # Step 4: No author found
+    
     else:
-        return ["❌ No books found"]
-# 🚀 MAIN PROGRAM
-print("📚 Book Recommendation System")
+        return [" No books found"]
+
+
+
+print("Book Recommendation System")
 
 while True:
     print("\n1. Search by Book")
@@ -138,7 +140,7 @@ while True:
         results = recommend_by_author(user)
 
     elif choice == "4":
-        print("Goodbye! 📖")
+        print("Goodbye! ")
         break
 
     else:
@@ -147,4 +149,4 @@ while True:
 
     print("\nRecommended Books:")
     for r in results:
-        print("👉", r)
+        print("_", r)
